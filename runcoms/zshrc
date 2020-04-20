@@ -40,7 +40,11 @@ eval "$(direnv hook zsh)"
 
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
+# brew install rbenv
 eval "$(rbenv init -)"
+
+# brew install pyenv
+eval "$(pyenv init -)"
 
 # brew install jenv
 export PATH="$HOME/.jenv/bin:$PATH"
