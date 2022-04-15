@@ -40,23 +40,23 @@ eval "$(direnv hook zsh)"
 
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
-# brew install rbenv
-eval "$(rbenv init -)"
+# brew install frum (ruby version manager)
+eval "$(frum init)"
 
-# brew install pyenv
+# brew install pyenv pipx
+# pipx install pipenv
 eval "$(pyenv init -)"
 
-# brew install jenv
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
-
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+# brew install nodenv
+eval "$(nodenv init -)"
 
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
 zplug "changyuheng/zsh-interactive-cd"
+zplug "clvv/fasd"
+zplug "b4b4r07/enhancd"
+zplug "Peltoche/lsd"
 if ! zplug check --verbose; then
   printf "Install? [y/N]: "
   if read -q; then
@@ -70,3 +70,19 @@ zplug load
 
 # heroku autocomplete setup
 HEROKU_AC_ZSH_SETUP_PATH=/Users/jay/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
+
+# added by travis gem
+[ ! -s /Users/jay/.travis/travis.sh ] || source /Users/jay/.travis/travis.sh
+
+# Created by `pipx` on 2022-01-17 20:49:10
+export PATH="$PATH:/Users/jay/.local/bin"
+
+# brew install starship
+# this presumably overrides the `Prompt` section of ~/.zpreztorc
+eval "$(starship init zsh)"
+
+[ -f "/Users/jay/.ghcup/env" ] && source "/Users/jay/.ghcup/env" # ghcup-env
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
